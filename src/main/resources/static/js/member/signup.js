@@ -56,6 +56,7 @@ const onSignUp = ()=>{
 
 // [2] (업로드 후) 회원가입 함수
 const onSignUp = ( ) => {
+    console.log('함수 실행');
     
     // 입력된 값을 하나씩 가져온느 방식이 아닌 form 전체를 한번에 가져오기(multipart/form-data)
     // [1] 전송할 form dom 객체를 가져온다.
