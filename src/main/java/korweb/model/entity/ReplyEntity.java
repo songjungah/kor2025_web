@@ -1,6 +1,7 @@
 package korweb.model.entity;
 
 import jakarta.persistence.*;
+import korweb.model.dto.BoardDto;
 import lombok.*;
 
 @Getter
@@ -31,5 +32,7 @@ public class ReplyEntity extends BaseTime {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "bno")
     private BoardEntity boardEntity;
+    
+
 
 }

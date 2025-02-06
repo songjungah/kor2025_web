@@ -1,6 +1,7 @@
 package korweb.model.entity;
 
 import jakarta.persistence.*;
+import korweb.model.dto.BoardDto;
 import lombok.*;
 
 @Getter
@@ -38,4 +39,21 @@ public class BoardEntity extends BaseTime {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cno")
     private CategoryEntity categoryEntity;
+
+
+    // + entity --> Dto 반환메소드
+    // 데이터베이스에 저장된 entity 를 조회한 후 dto로 변환
+    public BoardDto toDto() {
+        return BoardDto.builder()
+                .bno(this.bno)
+                .btitle(this.btitle)
+                .bcontent(this.bcontent)
+                .bview(this.bview)
+                .mno(this.memberEntity.getMno())
+                .cno(this.categoryEntity.getCno())
+                .mid(this.memberEntity.getMid())
+                .cname(this.categoryEntity.getCname())
+                .cdate(this.getCdate().toString())
+                .build();
+    }
 }
