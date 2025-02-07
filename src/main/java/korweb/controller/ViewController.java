@@ -37,4 +37,16 @@ public class ViewController {
         return "member/update.html";
     }
 
+    // [6] 게시물 목록 페이지를 반환해주는 메소드
+    @GetMapping("/board")
+    public String board() {
+        return "/board/board.html";
+    }
+
+    // [7] 게시물 쓰기 페이지를 반환해주는 메소드
+    @GetMapping("/board/write")
+    public String boardWrite() {
+        return "/board/write.html";
+    }
+
 }
