@@ -49,4 +49,10 @@ public class ViewController {
         return "/board/write.html";
     }
 
+    // [8] 게시물 개별 조회 페이지를 반환해주는 메소드
+    @GetMapping("/board/view")
+    public String boardView() {
+        return "/board/view.html";
+    }
+
 }

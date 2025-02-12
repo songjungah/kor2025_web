@@ -3,6 +3,9 @@ package korweb.model.dto;
 import korweb.model.entity.BoardEntity;
 import lombok.*;
 
+import java.util.List;
+import java.util.Map;
+
 @Getter
 @Setter
 @ToString
@@ -23,6 +26,9 @@ public class BoardDto {
     // 화면에는 작성자의 회원번호가 아닌 아이디를 출력해야하므로
     private String mid;         // 작성자의 회원아이디
     private String cname;       // 카테고리명
+
+    // * 댓글 리스트
+    private List<Map<String, String>> replylist;
 
 
     // + Dto --> entity 번환 메소드
