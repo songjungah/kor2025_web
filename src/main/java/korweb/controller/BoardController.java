@@ -26,13 +26,15 @@ public class BoardController {
 //        return boardService.boardFindAll();
 //    }
 
-    // [2] 카테고리별 게시물 전체 조회 + 페이징처리( vs 무한스크롤)
+    // [2] 카테고리별 게시물 전체 조회 + 페이징처리( vs 무한스크롤) + 검색
     // http://localhost:8080/board/findall.do?cno=1&page=1 : 1번(뉴스) 카테고리의 1번 페이지 조회
     // http://localhost:8080/board/findall.do?cno=1&page=3 : 1번(뉴스) 카테고리의 3번 페이지 조회
     // http://localhost:8080/board/findall.do?cno=3&page=2 : 3번(FAQ) 카테고리의 2번 페이지 조회
     @GetMapping("/board/findall.do")
-    public PageDto boardFindAll(@RequestParam int cno, @RequestParam int page) { // 조회할 카테고리 번호, 페이지 번호
-        return boardService.boardFindAll(cno, page);
+    public PageDto boardFindAll(@RequestParam int cno, @RequestParam int page,
+                                @RequestParam String key, @RequestParam String keyword) {
+        // cno = 조회할 카테고리번호, page = 현재 페이지 번호, key = 검색할 데이터의 속성명(btitle=제목/ bcontent=내용), keyword = 검색할 데이터
+        return boardService.boardFindAll(cno, page, key, keyword);
     }
 
     // [3] 게시물 특정(개별) 조회
