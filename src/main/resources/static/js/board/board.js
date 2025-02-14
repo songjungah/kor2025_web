@@ -17,10 +17,16 @@ const findAll = ( ) => {
     let page = new URL( location.href ).searchParams.get('page');
     if( page == null) page = 1; // 만약에 page가 없으면 1페이지로 설정
 
+    // 1. 검색필드와 검색어
+    let key = new URL(location.href).searchParams.get('key')
+    if (key == null) key = '';          // 만약에 key 가 없으면 공백으로 설정
+    let keyword = new URL(location.href).searchParams.get('keyword')
+    if (keyword == null) keyword = '';  // 만약에 keyword 가 없으면 공백으로 설정
+
     // 2. fetch option
     const option = { method : 'GET' }
     // 3. fetch + 페이징번호
-    fetch( `/board/findall.do?cno=${ cno }&page=${ page }` , option )
+    fetch( `/board/findall.do?cno=${ cno }&page=${ page }&key=${ key }&keyword=${ keyword }` , option )
         .then( r => r.json() )
         .then( response => {
             // 4. 요청 결과 응답 자료 확인
@@ -68,7 +74,7 @@ const printPageNation = (response, cno) => {
     let html = ``
 
     // 이전 버튼, 현재페이지에서 -1 차감한 페이지 이동, 만약에 현재페이지가 1이하 이면 1고정, 아니면 -1
-    html += `<li class="page-item"><a class="page-link" href="/board?cno=${cno}&page=${page <= 1 ? 1 : page -1 }">이전</a></li>`
+    html += `<li class="page-item"><a class="page-link" href="/board?cno=${cno}&page=${page <= 1 ? 1 : page -1 }&key=${ key }&keyword=${ keyword }">이전</a></li>`
 
     // 페이징 버튼, 반복문 이용하여 startbtn 부터 endbtn 까지 페이징 버튼 만들기
     for(let index = startbtn; index <= endbtn; index++) {
@@ -78,9 +84,24 @@ const printPageNation = (response, cno) => {
     }
 
     // 다음 버튼, 현제페이지에서 +1 증가한 페이지 이동, 만약에 현재페이지가 전체페이지수 이상이면 전체페이지수로 고정, 아니면 +1
-    html += `<li class="page-item"><a class="page-link" href="/board?cno=${cno}&page=${page >= totalpage ? totalpage : page +1}">다음</a></li>`
+    html += `<li class="page-item"><a class="page-link" href="/board?cno=${cno}&page=${page >= totalpage ? totalpage : page +1}&key=${ key }&keyword=${ keyword }">다음</a></li>`
 
     // (3) 출력
     pagebox.innerHTML = html;
 
+}
+
+
+// [3] 검색 버튼을 클릭했을 때 함수
+const onSearch = () => {
+    // 1. 선택한 검색필드와 입력받은 검색어 가져오기
+    const key = document.querySelector('.key').value;
+    const keyword = document.querySelector('.keyword').value;
+
+    // 2. 현재 카테고리 번호를 URL 에서 가져오기
+    const cno = new URL(location.href).searchParams.get('cno'); // 검색 기능 실행 시 현재 카테고리 유지하기 위해
+
+    // 3. 입력받은 검색필드 와 입력받은 검색어로 이동한다
+    // cno는 유지, 검색 후 결과는 1페이지 설정
+    location.href = `board?cno=${cno}&page=1&key=${key}&keyword=${keyword}`
 }
