@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div th:replace = "~{ /header.html :: header }"></div>
+
+    <div class="container">
+
+        <h3>카카오지도 API</h3>
+
+        <!-- 부트스트랩 '오프캔버스' -->
+          <button style="display: none;" class="btn btn-primary 사이드바버튼" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            약국 찾기
+          </button>
+          
+          <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasExampleLabel">약국 상세정보</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+
+            <div class="offcanvas-body">
+              <div class="약국명"></div>
+              <div class="전화번호"></div>
+              <div class="주소"></div>
+            </div>
+          </div>
+
+        <!-- <div id="map" style="width:500px;height:400px;"></div> -->
+        
+        <!-- <div id="map" style="width:100%;height:350px;"></div>
+        <p><em>지도를 클릭해주세요!</em></p> 
+        <div id="clickLatlng"></div> -->
+
+        <!-- <div id="map" style="width:100%;height:350px;"></div> -->
+        <!-- <p><em>마커를 클릭해주세요!</em></p>  -->
+
+        <div id="map" style="width:100%;height:500px;"></div>
+
+    </div>
+
+    <!-- 카카오지도 API 자바스크립트 / 주의할 점 : 개발자 JS 파일보다 먼저 실행되어야함 + 클러스터 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6bf935c204813c18b87aaaa483ac10a8&libraries=clusterer"></script>
+
+    <script src="/js/api/api2.js"></script>
+
+</body>

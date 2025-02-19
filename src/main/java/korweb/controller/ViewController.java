@@ -61,4 +61,9 @@ public class ViewController {
         return "/api/api1.html";
     }
 
+    @GetMapping("/api2")
+    public String api2() {
+        return "/api/api2.html";
+    }
+
 }
